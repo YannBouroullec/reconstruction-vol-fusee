@@ -6,6 +6,24 @@ __pycache__/
 # C extensions
 *.so
 
+# Environnement
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Sorties générées
+sorties/
+*.png
+*.gif
+
+# Documentation construite
+docs/_build/
+
+# IDE
+.idea/
+.vscode/
+
 # Distribution / packaging
 .Python
 build/
