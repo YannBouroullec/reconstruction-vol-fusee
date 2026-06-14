@@ -1,0 +1,8 @@
+numpy
+pandas
+matplotlib
+pyyaml
+pillow
+
+[docs]
+sphinx
