@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fusionvol"
+version = "0.1.0"
+description = "Reconstruction de trajectoire de vol de fusée par fusion de capteurs"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Théo Malavieille" },
+    { name = "Pierre-Jean Tulasne" },
+    { name = "Yann" },
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "pyyaml",
+    "pillow",
+]
+
+[project.optional-dependencies]
+docs = ["sphinx"]
+
+[tool.setuptools.packages.find]
+include = ["fusionvol*"]
