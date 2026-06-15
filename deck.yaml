@@ -1,0 +1,24 @@
+# Deck de configuration fusionvol
+# Tous les paramètres réglables par l'utilisateur sont ici.
+
+# --- Entrée ---
+fichier: donnees/flight_data_faraday.csv   # journal de vol à analyser
+nom_vol: Genesis                   # étiquette pour les titres (ou null)
+elevation_sol: 160.0               # altitude du site de lancement (m ASL)
+
+# --- Réglage du filtre complémentaire ---
+alpha: 0.98   # confiance accordée à l'accéléromètre (vitesse)
+beta: 0.90    # confiance accordée à la vitesse intégrée (altitude)
+
+# --- Paramètres fusée (requis seulement pour le coefficient de traînée) ---
+masse: 10.6        # kg
+surface_ref: 0.0069  # m^2
+
+# --- Sorties ---
+dossier_sortie: sorties
+tracer_profil: true
+tracer_comparaison: true
+tracer_portrait: true
+tracer_spectrogramme: true
+creer_replay: true
+fps_replay: 25
