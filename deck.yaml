@@ -22,3 +22,5 @@ tracer_portrait: true
 tracer_spectrogramme: true
 creer_replay: true
 fps_replay: 25
+tracer_comparaison_vitesse: true
+tracer_portrait_montee: true
