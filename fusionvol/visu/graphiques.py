@@ -105,6 +105,37 @@ class GraphiquesVol:
             plt.close(fig)
         return fig
 
+    #: Couleur fixe de chaque estimateur dans les comparaisons.
+    COULEURS_ESTIMATEURS = {
+        "Fusion": "#1f77b4",
+        "Baro seul": "#ff7f0e",
+        "Accel seul": "#2ca02c",
+    }
+
+    def _tracer_comparaison(self, axe, etats, attribut):
+        """Trace plusieurs estimateurs sur un axe, la fusion au premier plan.
+
+        Les estimateurs de référence sont tracés en arrière-plan, légèrement
+        transparents, et la fusion par-dessus en trait épais pour rester visible
+        même quand elle se superpose au baromètre.
+
+        :param axe: axe matplotlib à remplir.
+        :type axe: matplotlib.axes.Axes
+        :param etats: liste des états à comparer.
+        :type etats: list(fusionvol.fusion.base.EtatVol)
+        :param attribut: grandeur à tracer, ``"altitude"`` ou ``"vitesse"``.
+        :type attribut: str
+        """
+        references = [e for e in etats if e.nom != "Fusion"]
+        fusions = [e for e in etats if e.nom == "Fusion"]
+        for etat in references:
+            axe.plot(etat.temps, getattr(etat, attribut), lw=1.2, alpha=0.7,
+                     color=self.COULEURS_ESTIMATEURS.get(etat.nom), label=etat.nom)
+        for etat in fusions:
+            axe.plot(etat.temps, getattr(etat, attribut), lw=2.2, zorder=5,
+                     color=self.COULEURS_ESTIMATEURS.get(etat.nom, "#1f77b4"),
+                     label=etat.nom)
+
     def comparaison_estimateurs(self, etats, chemin=None):
         """Superpose l'altitude reconstruite par plusieurs estimateurs.
 
@@ -119,8 +150,7 @@ class GraphiquesVol:
         :rtype: matplotlib.figure.Figure
         """
         fig, ax = plt.subplots(figsize=(11, 6))
-        for etat in etats:
-            ax.plot(etat.temps, etat.altitude, lw=1.4, label=etat.nom)
+        self._tracer_comparaison(ax, etats, "altitude")
         ax.set_xlabel("Temps [s]")
         ax.set_ylabel("Altitude AGL [m]")
         ax.set_title("Comparaison des estimateurs d'altitude", fontweight="bold")
@@ -132,7 +162,33 @@ class GraphiquesVol:
             plt.close(fig)
         return fig
 
-    def portrait_phase(self, etat, analyse, phases, chemin=None):
+    def comparaison_vitesse(self, etats, chemin=None):
+        """Superpose la vitesse reconstruite par plusieurs estimateurs.
+
+        C'est ici que l'apport de la fusion se voit le mieux : l'accéléromètre
+        seul dérive, le baromètre dérivé est bruité, la fusion reste propre.
+
+        :param etats: liste des états à comparer.
+        :type etats: list(fusionvol.fusion.base.EtatVol)
+        :param chemin: chemin de sauvegarde. Si ``None``, pas d'enregistrement.
+        :type chemin: str or None
+        :return: la figure produite.
+        :rtype: matplotlib.figure.Figure
+        """
+        fig, ax = plt.subplots(figsize=(11, 6))
+        self._tracer_comparaison(ax, etats, "vitesse")
+        ax.set_xlabel("Temps [s]")
+        ax.set_ylabel("Vitesse [m/s]")
+        ax.set_title("Comparaison des estimateurs de vitesse", fontweight="bold")
+        ax.grid(alpha=0.25)
+        ax.legend()
+        fig.tight_layout()
+        if chemin is not None:
+            fig.savefig(chemin, dpi=140, bbox_inches="tight")
+            plt.close(fig)
+        return fig
+
+    def portrait_phase(self, etat, analyse, phases, chemin=None, montee_seule=False):
         """Trace l'altitude en fonction de la vitesse, colorée par le Mach.
 
         :param etat: état de vol reconstruit.
@@ -143,20 +199,31 @@ class GraphiquesVol:
         :type phases: fusionvol.analyse.phases.Phases
         :param chemin: chemin de sauvegarde. Si ``None``, pas d'enregistrement.
         :type chemin: str or None
+        :param montee_seule: si ``True``, ne trace que la phase de montée
+            (décollage à apogée), plus lisible car sans le bruit de descente.
+        :type montee_seule: bool
         :return: la figure produite.
         :rtype: matplotlib.figure.Figure
         """
-        fin = phases.indices["atterrissage"]
-        vit = etat.vitesse[:fin]
-        alt = etat.altitude[:fin]
-        mach = analyse.mach(etat)[:fin]
+        if montee_seule:
+            debut = phases.indices["decollage"]
+            fin = phases.indices["apogee"] + 1
+        else:
+            debut = 0
+            fin = phases.indices["atterrissage"]
+        vit = etat.vitesse[debut:fin]
+        alt = etat.altitude[debut:fin]
+        mach = analyse.mach(etat)[debut:fin]
 
         fig, ax = plt.subplots(figsize=(8, 7))
         nuage = ax.scatter(vit, alt, c=mach, cmap="viridis", s=4)
         fig.colorbar(nuage, ax=ax, label="Mach")
         ax.set_xlabel("Vitesse [m/s]")
         ax.set_ylabel("Altitude AGL [m]")
-        ax.set_title("Portrait de phase altitude-vitesse : " + etat.nom, fontweight="bold")
+        titre = "Portrait de phase altitude-vitesse"
+        if montee_seule:
+            titre += " (montée)"
+        ax.set_title(titre + " : " + etat.nom, fontweight="bold")
         ax.grid(alpha=0.25)
         fig.tight_layout()
         if chemin is not None:
