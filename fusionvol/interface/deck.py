@@ -18,6 +18,8 @@ DEFAUTS = {
     "tracer_spectrogramme": True,
     "creer_replay": True,
     "fps_replay": 25,
+    "tracer_comparaison_vitesse": True,
+    "tracer_portrait_montee": True,
 }
 
 

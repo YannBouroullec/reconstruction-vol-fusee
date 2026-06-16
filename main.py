@@ -57,8 +57,15 @@ def executer(chemin_deck="deck.yaml"):
     if parametres["tracer_comparaison"]:
         graphiques.comparaison_estimateurs([etat, etat_baro, etat_accel],
                                            os.path.join(dossier, "comparaison.png"))
+    if parametres["tracer_comparaison_vitesse"]:
+        graphiques.comparaison_vitesse([etat, etat_baro, etat_accel],
+                                       os.path.join(dossier, "comparaison_vitesse.png"))
     if parametres["tracer_portrait"]:
         graphiques.portrait_phase(etat, analyse, phases, os.path.join(dossier, "portrait.png"))
+    if parametres["tracer_portrait_montee"]:
+        graphiques.portrait_phase(etat, analyse, phases,
+                                  os.path.join(dossier, "portrait_montee.png"),
+                                  montee_seule=True)
     if parametres["tracer_spectrogramme"]:
         Spectrogramme().tracer(donnees.temps, donnees.acceleration,
                                os.path.join(dossier, "spectrogramme.png"))
