@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>fusionvol.visu package &#8212; fusionvol 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="fusionvol.interface package" href="fusionvol.interface.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="fusionvol-visu-package">
+<h1>fusionvol.visu package<a class="headerlink" href="#fusionvol-visu-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-fusionvol.visu.animation">
+<span id="fusionvol-visu-animation-module"></span><h2>fusionvol.visu.animation module<a class="headerlink" href="#module-fusionvol.visu.animation" title="Link to this heading">¶</a></h2>
+<p>Replay animé du vol, exporté en GIF.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.animation.ReplayVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.animation.</span></span><span class="sig-name descname"><span class="pre">ReplayVol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duree_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.animation.ReplayVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Construit une animation du vol reconstruit et l’enregistre en GIF.</p>
+<p>Un marqueur suit la trajectoire altitude-temps pendant que des indicateurs
+(vitesse, Mach) défilent. Les images sont sous-échantillonnées pour garder
+un fichier de taille raisonnable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fps</strong> – nombre d’images par seconde du GIF.</p></li>
+<li><p><strong>duree_max</strong> – durée maximale de l’animation (s).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.animation.ReplayVol.animer">
+<span class="sig-name descname"><span class="pre">animer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'replay.gif'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.animation.ReplayVol.animer" title="Link to this definition">¶</a></dt>
+<dd><p>Crée l’animation et l’enregistre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em>) – chemin du GIF de sortie.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>le chemin du fichier écrit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.visu.graphiques">
+<span id="fusionvol-visu-graphiques-module"></span><h2>fusionvol.visu.graphiques module<a class="headerlink" href="#module-fusionvol.visu.graphiques" title="Link to this heading">¶</a></h2>
+<p>Graphiques statiques du vol reconstruit.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.graphiques.</span></span><span class="sig-name descname"><span class="pre">GraphiquesVol</span></span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Produit les graphiques statiques d’un vol.</p>
+<p>Regroupe le profil complet (altitude, vitesse/Mach, pression dynamique),
+la comparaison des estimateurs et le portrait de phase.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.COULEURS_ESTIMATEURS">
+<span class="sig-name descname"><span class="pre">COULEURS_ESTIMATEURS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Accel</span> <span class="pre">seul':</span> <span class="pre">'#2ca02c',</span> <span class="pre">'Baro</span> <span class="pre">seul':</span> <span class="pre">'#ff7f0e',</span> <span class="pre">'Fusion':</span> <span class="pre">'#1f77b4'}</span></span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.COULEURS_ESTIMATEURS" title="Link to this definition">¶</a></dt>
+<dd><p>Couleur fixe de chaque estimateur dans les comparaisons.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.COULEURS_PHASES">
+<span class="sig-name descname"><span class="pre">COULEURS_PHASES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'balistique':</span> <span class="pre">'#42a5f5',</span> <span class="pre">'descente':</span> <span class="pre">'#9ccc65',</span> <span class="pre">'propulsion':</span> <span class="pre">'#ff7043'}</span></span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.COULEURS_PHASES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.comparaison_estimateurs">
+<span class="sig-name descname"><span class="pre">comparaison_estimateurs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.comparaison_estimateurs" title="Link to this definition">¶</a></dt>
+<dd><p>Superpose l’altitude reconstruite par plusieurs estimateurs.</p>
+<p>Met en évidence la dérive de l’estimateur accéléromètre seul face au
+baromètre et à la fusion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etats</strong> (<em>list</em><em>(</em><a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a><em>)</em>) – liste des états à comparer.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.comparaison_vitesse">
+<span class="sig-name descname"><span class="pre">comparaison_vitesse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.comparaison_vitesse" title="Link to this definition">¶</a></dt>
+<dd><p>Superpose la vitesse reconstruite par plusieurs estimateurs.</p>
+<p>C’est ici que l’apport de la fusion se voit le mieux : l’accéléromètre
+seul dérive, le baromètre dérivé est bruité, la fusion reste propre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etats</strong> (<em>list</em><em>(</em><a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a><em>)</em>) – liste des états à comparer.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.portrait_phase">
+<span class="sig-name descname"><span class="pre">portrait_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montee_seule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.portrait_phase" title="Link to this definition">¶</a></dt>
+<dd><p>Trace l’altitude en fonction de la vitesse, colorée par le Mach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+<li><p><strong>montee_seule</strong> (<em>bool</em>) – si <code class="docutils literal notranslate"><span class="pre">True</span></code>, ne trace que la phase de montée
+(décollage à apogée), plus lisible car sans le bruit de descente.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.graphiques.GraphiquesVol.profil_complet">
+<span class="sig-name descname"><span class="pre">profil_complet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.graphiques.GraphiquesVol.profil_complet" title="Link to this definition">¶</a></dt>
+<dd><p>Trace le profil de vol en trois panneaux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, la figure n’est pas
+enregistrée.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.visu.spectre">
+<span id="fusionvol-visu-spectre-module"></span><h2>fusionvol.visu.spectre module<a class="headerlink" href="#module-fusionvol.visu.spectre" title="Link to this heading">¶</a></h2>
+<p>Spectrogramme du signal d’accélération (analyse fréquentielle).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.spectre.Spectrogramme">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.spectre.</span></span><span class="sig-name descname"><span class="pre">Spectrogramme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taille_fenetre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recouvrement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.spectre.Spectrogramme" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calcule et trace le spectrogramme de l’accélération.</p>
+<p>Le signal est découpé en fenêtres successives qui se recouvrent ; sur
+chacune on applique une fenêtre de Hann puis une transformée de Fourier
+rapide. On obtient ainsi l’évolution du contenu fréquentiel au cours du
+temps (vibrations du moteur, oscillations sous parachute).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taille_fenetre</strong> – nombre d’échantillons par fenêtre.</p></li>
+<li><p><strong>recouvrement</strong> – fraction de recouvrement entre fenêtres, dans [0, 1[.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.spectre.Spectrogramme.calculer">
+<span class="sig-name descname"><span class="pre">calculer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.spectre.Spectrogramme.calculer" title="Link to this definition">¶</a></dt>
+<dd><p>Calcule le spectrogramme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>signal</strong> (<em>numpy.ndarray</em>) – signal à analyser (par exemple l’accélération).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>triplet (fréquences en Hz, instants en s, amplitudes en dB).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(numpy.ndarray, numpy.ndarray, numpy.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.spectre.Spectrogramme.tracer">
+<span class="sig-name descname"><span class="pre">tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.spectre.Spectrogramme.tracer" title="Link to this definition">¶</a></dt>
+<dd><p>Trace le spectrogramme sous forme de carte de chaleur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>signal</strong> (<em>numpy.ndarray</em>) – signal à analyser.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.visu">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-fusionvol.visu" title="Link to this heading">¶</a></h2>
+<p>Sous-paquet des visualisations (graphiques, replay, spectrogramme).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.</span></span><span class="sig-name descname"><span class="pre">GraphiquesVol</span></span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Produit les graphiques statiques d’un vol.</p>
+<p>Regroupe le profil complet (altitude, vitesse/Mach, pression dynamique),
+la comparaison des estimateurs et le portrait de phase.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.COULEURS_ESTIMATEURS">
+<span class="sig-name descname"><span class="pre">COULEURS_ESTIMATEURS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Accel</span> <span class="pre">seul':</span> <span class="pre">'#2ca02c',</span> <span class="pre">'Baro</span> <span class="pre">seul':</span> <span class="pre">'#ff7f0e',</span> <span class="pre">'Fusion':</span> <span class="pre">'#1f77b4'}</span></span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.COULEURS_ESTIMATEURS" title="Link to this definition">¶</a></dt>
+<dd><p>Couleur fixe de chaque estimateur dans les comparaisons.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.COULEURS_PHASES">
+<span class="sig-name descname"><span class="pre">COULEURS_PHASES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'balistique':</span> <span class="pre">'#42a5f5',</span> <span class="pre">'descente':</span> <span class="pre">'#9ccc65',</span> <span class="pre">'propulsion':</span> <span class="pre">'#ff7043'}</span></span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.COULEURS_PHASES" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.comparaison_estimateurs">
+<span class="sig-name descname"><span class="pre">comparaison_estimateurs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.comparaison_estimateurs" title="Link to this definition">¶</a></dt>
+<dd><p>Superpose l’altitude reconstruite par plusieurs estimateurs.</p>
+<p>Met en évidence la dérive de l’estimateur accéléromètre seul face au
+baromètre et à la fusion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etats</strong> (<em>list</em><em>(</em><a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a><em>)</em>) – liste des états à comparer.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.comparaison_vitesse">
+<span class="sig-name descname"><span class="pre">comparaison_vitesse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.comparaison_vitesse" title="Link to this definition">¶</a></dt>
+<dd><p>Superpose la vitesse reconstruite par plusieurs estimateurs.</p>
+<p>C’est ici que l’apport de la fusion se voit le mieux : l’accéléromètre
+seul dérive, le baromètre dérivé est bruité, la fusion reste propre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etats</strong> (<em>list</em><em>(</em><a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a><em>)</em>) – liste des états à comparer.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.portrait_phase">
+<span class="sig-name descname"><span class="pre">portrait_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">montee_seule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.portrait_phase" title="Link to this definition">¶</a></dt>
+<dd><p>Trace l’altitude en fonction de la vitesse, colorée par le Mach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+<li><p><strong>montee_seule</strong> (<em>bool</em>) – si <code class="docutils literal notranslate"><span class="pre">True</span></code>, ne trace que la phase de montée
+(décollage à apogée), plus lisible car sans le bruit de descente.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.GraphiquesVol.profil_complet">
+<span class="sig-name descname"><span class="pre">profil_complet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.GraphiquesVol.profil_complet" title="Link to this definition">¶</a></dt>
+<dd><p>Trace le profil de vol en trois panneaux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, la figure n’est pas
+enregistrée.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.ReplayVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.</span></span><span class="sig-name descname"><span class="pre">ReplayVol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duree_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.ReplayVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Construit une animation du vol reconstruit et l’enregistre en GIF.</p>
+<p>Un marqueur suit la trajectoire altitude-temps pendant que des indicateurs
+(vitesse, Mach) défilent. Les images sont sous-échantillonnées pour garder
+un fichier de taille raisonnable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fps</strong> – nombre d’images par seconde du GIF.</p></li>
+<li><p><strong>duree_max</strong> – durée maximale de l’animation (s).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.ReplayVol.animer">
+<span class="sig-name descname"><span class="pre">animer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">analyse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phases</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'replay.gif'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.ReplayVol.animer" title="Link to this definition">¶</a></dt>
+<dd><p>Crée l’animation et l’enregistre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etat</strong> (<a class="reference internal" href="fusionvol.fusion.html#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><em>fusionvol.fusion.base.EtatVol</em></a>) – état de vol reconstruit.</p></li>
+<li><p><strong>analyse</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.performance.AnalysePerformance" title="fusionvol.analyse.performance.AnalysePerformance"><em>fusionvol.analyse.performance.AnalysePerformance</em></a>) – analyse de performance configurée.</p></li>
+<li><p><strong>phases</strong> (<a class="reference internal" href="fusionvol.analyse.html#fusionvol.analyse.phases.Phases" title="fusionvol.analyse.phases.Phases"><em>fusionvol.analyse.phases.Phases</em></a>) – phases détectées.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em>) – chemin du GIF de sortie.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>le chemin du fichier écrit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.visu.Spectrogramme">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.visu.</span></span><span class="sig-name descname"><span class="pre">Spectrogramme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taille_fenetre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recouvrement</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.Spectrogramme" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calcule et trace le spectrogramme de l’accélération.</p>
+<p>Le signal est découpé en fenêtres successives qui se recouvrent ; sur
+chacune on applique une fenêtre de Hann puis une transformée de Fourier
+rapide. On obtient ainsi l’évolution du contenu fréquentiel au cours du
+temps (vibrations du moteur, oscillations sous parachute).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taille_fenetre</strong> – nombre d’échantillons par fenêtre.</p></li>
+<li><p><strong>recouvrement</strong> – fraction de recouvrement entre fenêtres, dans [0, 1[.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.Spectrogramme.calculer">
+<span class="sig-name descname"><span class="pre">calculer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.Spectrogramme.calculer" title="Link to this definition">¶</a></dt>
+<dd><p>Calcule le spectrogramme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>signal</strong> (<em>numpy.ndarray</em>) – signal à analyser (par exemple l’accélération).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>triplet (fréquences en Hz, instants en s, amplitudes en dB).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(numpy.ndarray, numpy.ndarray, numpy.ndarray)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.visu.Spectrogramme.tracer">
+<span class="sig-name descname"><span class="pre">tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chemin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.visu.Spectrogramme.tracer" title="Link to this definition">¶</a></dt>
+<dd><p>Trace le spectrogramme sous forme de carte de chaleur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>signal</strong> (<em>numpy.ndarray</em>) – signal à analyser.</p></li>
+<li><p><strong>chemin</strong> (<em>str</em><em> or </em><em>None</em>) – chemin de sauvegarde. Si <code class="docutils literal notranslate"><span class="pre">None</span></code>, pas d’enregistrement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>la figure produite.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>matplotlib.figure.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">fusionvol</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenu</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fusionvol</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fusionvol.html">fusionvol package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">fusionvol</a><ul>
+  <li><a href="fusionvol.html">fusionvol package</a><ul>
+      <li>Previous: <a href="fusionvol.interface.html" title="previous chapter">fusionvol.interface package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/fusionvol.visu.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

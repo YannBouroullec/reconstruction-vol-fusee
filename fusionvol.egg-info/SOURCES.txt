@@ -18,6 +18,12 @@ fusionvol/fusion/__init__.py
 fusionvol/fusion/base.py
 fusionvol/fusion/complementaire.py
 fusionvol/fusion/references.py
+fusionvol/interface/__init__.py
+fusionvol/interface/deck.py
+fusionvol/visu/__init__.py
+fusionvol/visu/animation.py
+fusionvol/visu/graphiques.py
+fusionvol/visu/spectre.py
 tests/test_atmosphere.py
 tests/test_capteurs.py
 tests/test_fusion.py

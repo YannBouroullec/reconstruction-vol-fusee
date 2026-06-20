@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>fusionvol.fusion package &#8212; fusionvol 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fusionvol.interface package" href="fusionvol.interface.html" />
+    <link rel="prev" title="fusionvol.capteurs package" href="fusionvol.capteurs.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="fusionvol-fusion-package">
+<h1>fusionvol.fusion package<a class="headerlink" href="#fusionvol-fusion-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-fusionvol.fusion.base">
+<span id="fusionvol-fusion-base-module"></span><h2>fusionvol.fusion.base module<a class="headerlink" href="#module-fusionvol.fusion.base" title="Link to this heading">¶</a></h2>
+<p>Contrat commun des estimateurs d’état et conteneur de résultat.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.base.EstimateurEtat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.base.</span></span><span class="sig-name descname"><span class="pre">EstimateurEtat</span></span><a class="headerlink" href="#fusionvol.fusion.base.EstimateurEtat" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Interface commune à tous les estimateurs d’état.</p>
+<p>Un estimateur reçoit le temps, l’altitude barométrique et l’accélération
+verticale, et renvoie un <a class="reference internal" href="#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtatVol</span></code></a>. Toutes les implémentations
+(filtre complémentaire, estimateurs de référence) respectent ce contrat,
+ce qui permet au reste du programme de les utiliser de façon
+interchangeable.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.base.EstimateurEtat.estimer">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.base.EstimateurEtat.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état de vol à partir des mesures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol reconstruit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.base.EtatVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.base.</span></span><span class="sig-name descname"><span class="pre">EtatVol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vitesse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'etat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.base.EtatVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>État de vol reconstruit (résultat d’un estimateur).</p>
+<p>Les quatre tableaux partagent la même grille de temps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> – instants (s).</p></li>
+<li><p><strong>altitude</strong> – altitude reconstruite (m).</p></li>
+<li><p><strong>vitesse</strong> – vitesse verticale reconstruite (m/s).</p></li>
+<li><p><strong>acceleration</strong> – accélération verticale (m/s^2).</p></li>
+<li><p><strong>nom</strong> – étiquette de la méthode ayant produit cet état.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fusionvol.fusion.base.integrer">
+<span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.base.</span></span><span class="sig-name descname"><span class="pre">integrer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valeurs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.base.integrer" title="Link to this definition">¶</a></dt>
+<dd><p>Intègre un signal par la méthode des trapèzes, valeur initiale nulle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>valeurs</strong> (<em>numpy.ndarray</em>) – signal à intégrer.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – pas de temps (s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>intégrale cumulée, de même taille que l’entrée.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fusionvol.fusion.base.lisser">
+<span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.base.</span></span><span class="sig-name descname"><span class="pre">lisser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">valeurs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fenetre</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.base.lisser" title="Link to this definition">¶</a></dt>
+<dd><p>Lisse un signal par moyenne glissante centrée.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>valeurs</strong> (<em>numpy.ndarray</em>) – signal à lisser.</p></li>
+<li><p><strong>fenetre</strong> (<em>int</em>) – taille de la fenêtre (nombre d’échantillons).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>signal lissé, de même taille que l’entrée.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.fusion.complementaire">
+<span id="fusionvol-fusion-complementaire-module"></span><h2>fusionvol.fusion.complementaire module<a class="headerlink" href="#module-fusionvol.fusion.complementaire" title="Link to this heading">¶</a></h2>
+<p>Filtre complémentaire : fusion de l’accéléromètre et du baromètre.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.complementaire.FiltreComplementaire">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.complementaire.</span></span><span class="sig-name descname"><span class="pre">FiltreComplementaire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.98</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fenetre_lissage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.complementaire.FiltreComplementaire" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur par filtre complémentaire.</p>
+<p>Le principe : l’accéléromètre est fiable à court terme mais dérive quand on
+l’intègre, alors que le baromètre est stable à long terme mais bruité et
+lent. Le filtre fait confiance à l’accéléromètre sur le court terme et
+recale progressivement vers le baromètre, réglé par deux coefficients
+proches de 1.</p>
+<p>Pour chaque pas de temps :</p>
+<ul class="simple">
+<li><p>vitesse : <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">alpha</span> <span class="pre">*</span> <span class="pre">(v_prec</span> <span class="pre">+</span> <span class="pre">a*dt)</span> <span class="pre">+</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">alpha)</span> <span class="pre">*</span> <span class="pre">v_baro</span></code></p></li>
+<li><p>altitude : <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">beta</span> <span class="pre">*</span> <span class="pre">(h_prec</span> <span class="pre">+</span> <span class="pre">v*dt)</span> <span class="pre">+</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">beta)</span> <span class="pre">*</span> <span class="pre">h_baro</span></code></p></li>
+</ul>
+<p>où <code class="docutils literal notranslate"><span class="pre">v_baro</span></code> est la dérivée lissée de l’altitude barométrique.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> – confiance accordée à l’accéléromètre pour la vitesse.</p></li>
+<li><p><strong>beta</strong> – confiance accordée à la vitesse intégrée pour l’altitude.</p></li>
+<li><p><strong>fenetre_lissage</strong> – taille de la fenêtre de lissage de la dérivée baro.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.complementaire.FiltreComplementaire.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.complementaire.FiltreComplementaire.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état de vol par fusion complémentaire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol fusionné.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.fusion.references">
+<span id="fusionvol-fusion-references-module"></span><h2>fusionvol.fusion.references module<a class="headerlink" href="#module-fusionvol.fusion.references" title="Link to this heading">¶</a></h2>
+<p>Estimateurs de référence, pour comparer avec le filtre complémentaire.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.references.EstimateurAccel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.references.</span></span><span class="sig-name descname"><span class="pre">EstimateurAccel</span></span><a class="headerlink" href="#fusionvol.fusion.references.EstimateurAccel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur n’utilisant que l’accéléromètre.</p>
+<p>La vitesse est l’intégrale de l’accélération et l’altitude sa double
+intégrale. Bon à court terme, mais dérive nettement sur la durée : c’est
+précisément ce que la fusion corrige.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.references.EstimateurAccel.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.references.EstimateurAccel.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état à partir du seul accéléromètre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m), utilisée seulement pour
+l’altitude de départ.</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol estimé.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.references.EstimateurBaro">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.references.</span></span><span class="sig-name descname"><span class="pre">EstimateurBaro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fenetre_lissage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.references.EstimateurBaro" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur n’utilisant que le baromètre.</p>
+<p>L’altitude est l’altitude barométrique telle quelle ; la vitesse est sa
+dérivée lissée. Altitude propre mais vitesse bruitée et en retard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fenetre_lissage</strong> – taille de la fenêtre de lissage de la dérivée.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.references.EstimateurBaro.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.references.EstimateurBaro.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état à partir du seul baromètre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol estimé.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.base.EtatVol" title="fusionvol.fusion.base.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-fusionvol.fusion">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-fusionvol.fusion" title="Link to this heading">¶</a></h2>
+<p>Sous-paquet des estimateurs d’état (fusion de capteurs).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurAccel">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.</span></span><span class="sig-name descname"><span class="pre">EstimateurAccel</span></span><a class="headerlink" href="#fusionvol.fusion.EstimateurAccel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur n’utilisant que l’accéléromètre.</p>
+<p>La vitesse est l’intégrale de l’accélération et l’altitude sa double
+intégrale. Bon à court terme, mais dérive nettement sur la durée : c’est
+précisément ce que la fusion corrige.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurAccel.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.EstimateurAccel.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état à partir du seul accéléromètre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m), utilisée seulement pour
+l’altitude de départ.</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol estimé.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.EtatVol" title="fusionvol.fusion.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurBaro">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.</span></span><span class="sig-name descname"><span class="pre">EstimateurBaro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fenetre_lissage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.EstimateurBaro" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur n’utilisant que le baromètre.</p>
+<p>L’altitude est l’altitude barométrique telle quelle ; la vitesse est sa
+dérivée lissée. Altitude propre mais vitesse bruitée et en retard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fenetre_lissage</strong> – taille de la fenêtre de lissage de la dérivée.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurBaro.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.EstimateurBaro.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état à partir du seul baromètre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol estimé.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.EtatVol" title="fusionvol.fusion.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurEtat">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.</span></span><span class="sig-name descname"><span class="pre">EstimateurEtat</span></span><a class="headerlink" href="#fusionvol.fusion.EstimateurEtat" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Interface commune à tous les estimateurs d’état.</p>
+<p>Un estimateur reçoit le temps, l’altitude barométrique et l’accélération
+verticale, et renvoie un <a class="reference internal" href="#fusionvol.fusion.EtatVol" title="fusionvol.fusion.EtatVol"><code class="xref py py-class docutils literal notranslate"><span class="pre">EtatVol</span></code></a>. Toutes les implémentations
+(filtre complémentaire, estimateurs de référence) respectent ce contrat,
+ce qui permet au reste du programme de les utiliser de façon
+interchangeable.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.EstimateurEtat.estimer">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.EstimateurEtat.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état de vol à partir des mesures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol reconstruit.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.EtatVol" title="fusionvol.fusion.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.EtatVol">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.</span></span><span class="sig-name descname"><span class="pre">EtatVol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vitesse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'etat'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.EtatVol" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>État de vol reconstruit (résultat d’un estimateur).</p>
+<p>Les quatre tableaux partagent la même grille de temps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> – instants (s).</p></li>
+<li><p><strong>altitude</strong> – altitude reconstruite (m).</p></li>
+<li><p><strong>vitesse</strong> – vitesse verticale reconstruite (m/s).</p></li>
+<li><p><strong>acceleration</strong> – accélération verticale (m/s^2).</p></li>
+<li><p><strong>nom</strong> – étiquette de la méthode ayant produit cet état.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="fusionvol.fusion.FiltreComplementaire">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">fusionvol.fusion.</span></span><span class="sig-name descname"><span class="pre">FiltreComplementaire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.98</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fenetre_lissage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.FiltreComplementaire" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fusionvol.fusion.base.EstimateurEtat" title="fusionvol.fusion.base.EstimateurEtat"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimateurEtat</span></code></a></p>
+<p>Estimateur par filtre complémentaire.</p>
+<p>Le principe : l’accéléromètre est fiable à court terme mais dérive quand on
+l’intègre, alors que le baromètre est stable à long terme mais bruité et
+lent. Le filtre fait confiance à l’accéléromètre sur le court terme et
+recale progressivement vers le baromètre, réglé par deux coefficients
+proches de 1.</p>
+<p>Pour chaque pas de temps :</p>
+<ul class="simple">
+<li><p>vitesse : <code class="docutils literal notranslate"><span class="pre">v</span> <span class="pre">=</span> <span class="pre">alpha</span> <span class="pre">*</span> <span class="pre">(v_prec</span> <span class="pre">+</span> <span class="pre">a*dt)</span> <span class="pre">+</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">alpha)</span> <span class="pre">*</span> <span class="pre">v_baro</span></code></p></li>
+<li><p>altitude : <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">beta</span> <span class="pre">*</span> <span class="pre">(h_prec</span> <span class="pre">+</span> <span class="pre">v*dt)</span> <span class="pre">+</span> <span class="pre">(1</span> <span class="pre">-</span> <span class="pre">beta)</span> <span class="pre">*</span> <span class="pre">h_baro</span></code></p></li>
+</ul>
+<p>où <code class="docutils literal notranslate"><span class="pre">v_baro</span></code> est la dérivée lissée de l’altitude barométrique.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> – confiance accordée à l’accéléromètre pour la vitesse.</p></li>
+<li><p><strong>beta</strong> – confiance accordée à la vitesse intégrée pour l’altitude.</p></li>
+<li><p><strong>fenetre_lissage</strong> – taille de la fenêtre de lissage de la dérivée baro.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fusionvol.fusion.FiltreComplementaire.estimer">
+<span class="sig-name descname"><span class="pre">estimer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceleration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fusionvol.fusion.FiltreComplementaire.estimer" title="Link to this definition">¶</a></dt>
+<dd><p>Reconstruit l’état de vol par fusion complémentaire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temps</strong> (<em>numpy.ndarray</em>) – instants (s).</p></li>
+<li><p><strong>altitude</strong> (<em>numpy.ndarray</em>) – altitude barométrique (m).</p></li>
+<li><p><strong>acceleration</strong> (<em>numpy.ndarray</em>) – accélération verticale (m/s^2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>l’état de vol fusionné.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#fusionvol.fusion.EtatVol" title="fusionvol.fusion.EtatVol">EtatVol</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">fusionvol</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contenu</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">fusionvol</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fusionvol.html">fusionvol package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">fusionvol</a><ul>
+  <li><a href="fusionvol.html">fusionvol package</a><ul>
+      <li>Previous: <a href="fusionvol.capteurs.html" title="previous chapter">fusionvol.capteurs package</a></li>
+      <li>Next: <a href="fusionvol.interface.html" title="next chapter">fusionvol.interface package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/fusionvol.fusion.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

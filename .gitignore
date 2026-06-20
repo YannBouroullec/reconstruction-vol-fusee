@@ -9,8 +9,6 @@ sorties/
 *.png
 *.gif
 
-# Documentation construite
-docs/_build/
 
 # IDE
 .idea/
