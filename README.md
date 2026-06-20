@@ -60,6 +60,25 @@ Le paquet est découpé en sous-paquets, un par grande tâche :
 - `visu` : graphiques, replay animé, spectrogramme
 - `interface` : lecture du deck YAML
 
+## Documentation
+
+La doc est générée avec Sphinx à partir des docstrings :
+
+    pip install -e ".[docs]"
+    sphinx-apidoc -o docs fusionvol
+    sphinx-build -b html docs docs/_build
+
+Puis ouvrir `docs/_build/index.html`.
+
+## Références
+
+- Ceotto et al. (2021). RocketPy: Six Degree-of-Freedom Rocket Trajectory Simulator. Journal of Aerospace Engineering, 34(6).
+- Higgins, W. T. (1975). A Comparison of Complementary and Kalman Filtering. IEEE Trans. Aerospace and Electronic Systems.
+- Kalman, R. E. (1960). A New Approach to Linear Filtering and Prediction Problems. Journal of Basic Engineering.
+- ISO 2533:1975, Atmosphère type internationale (ISA).
+- EuRoC – European Rocketry Challenge (origine des journaux de vol, via le dépôt RocketPy).
+
+
 ## Équipe
 
 Théo Malavieille, Pierre-Jean Tulasne, Yann Bouroullec
